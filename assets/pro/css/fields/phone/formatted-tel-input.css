@@ -1,0 +1,22 @@
+div.input-group.phone-formatted {
+    display:flex;
+    gap: 2px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+
+    .input-group-prepend select, input[type="tel"] {
+        border:none;
+        outline: none;
+        &:focus {
+            border:none;
+            outline: none;
+            box-shadow:none;
+        }
+    }
+
+    .input-group-prepend select{
+        max-width: 100px
+    }
+
+
+}

@@ -73,6 +73,12 @@ class WPForms_Field_Phone extends WPForms_Field {
 			$properties['inputs']['primary']['data']['rule-int-phone-field'] = 'true';
 		}
 
+		// Formated: add custom attributes.
+		if( $field['format'] === 'formatted' ) {
+			$properties['inputs']['primary']['data']['inputmask'] = "'mask': '999-999-9999'";
+			$properties['inputs']['primary']['data']['is-formatted'] = 'false';
+		}
+
 		return $properties;
 	}
 
@@ -85,7 +91,7 @@ class WPForms_Field_Phone extends WPForms_Field {
 	 */
 	public function enqueue_frontend_css( $forms ) {
 
-		if ( ! wpforms()->frontend->assets_global() && ! $this->has_smart_format( $forms ) ) {
+		if ( ! wpforms()->frontend->assets_global() && ! $this->has_smart_format( $forms ) && ! $this->has_formatted_phone( $forms ) ) {
 			return;
 		}
 
@@ -98,6 +104,15 @@ class WPForms_Field_Phone extends WPForms_Field {
 			[],
 			self::INTL_VERSION
 		);
+
+		if ( $this->has_formatted_phone( $forms ) ) {
+			wp_enqueue_style(
+				'wpforms-formatted-phone-field',
+				WPFORMS_PLUGIN_URL . "assets/pro/css/fields/phone/formatted-tel-input.css",
+				[],
+				self::INTL_VERSION
+			);
+		}
 	}
 
 	/**
@@ -108,8 +123,7 @@ class WPForms_Field_Phone extends WPForms_Field {
 	 * @param array $forms Form data of forms on the current page.
 	 */
 	public function enqueue_frontend_js( $forms ) {
-
-		if ( ! wpforms()->frontend->assets_global() && ! $this->has_smart_format( $forms ) ) {
+		if ( ! wpforms()->frontend->assets_global() && ! $this->has_smart_format( $forms )  && ! $this->has_formatted_phone( $forms ) ) {
 			return;
 		}
 
@@ -121,6 +135,24 @@ class WPForms_Field_Phone extends WPForms_Field {
 			self::INTL_VERSION,
 			true
 		);
+
+		if ( $this->has_formatted_phone( $forms ) ) {
+			wp_enqueue_script(
+				'wpforms-countries-phone',
+				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/countries.js',
+				[ 'jquery' ],
+				'',
+				true
+			);
+
+			wp_enqueue_script(
+				'wpforms-formatted-phone-field',
+				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/phone-formatted.js',
+				[ 'jquery' ],
+				'',
+				true
+			);
+		}
 	}
 
 	/**
@@ -141,6 +173,32 @@ class WPForms_Field_Phone extends WPForms_Field {
 
 			foreach ( $form_data['fields'] as $field ) {
 				if ( 'phone' === $field['type'] && isset( $field['format'] ) && 'smart' === $field['format'] ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Find phone field formatted
+	 *
+	 * @since 1.6.3
+	 *
+	 * @param array $forms Form data of forms on the current page.
+	 *
+	 * @return bool
+	 */
+	private function has_formatted_phone( $forms ) {
+
+		foreach ( $forms as $form_data ) {
+			if ( empty( $form_data['fields'] ) ) {
+				continue;
+			}
+
+			foreach ( $form_data['fields'] as $field ) {
+				if ( 'phone' === $field['type'] && isset( $field['format'] ) && 'formatted' === $field['format'] ) {
 					return true;
 				}
 			}
@@ -209,6 +267,7 @@ class WPForms_Field_Phone extends WPForms_Field {
 					'smart'         => esc_html__( 'Smart', 'wpforms' ),
 					'us'            => esc_html__( 'US', 'wpforms' ),
 					'international' => esc_html__( 'International', 'wpforms' ),
+					'formatted'     => esc_html__( 'Formatted', 'wpforms' ),
 				],
 			],
 			false

@@ -37,6 +37,23 @@ document.querySelectorAll("input[data-is-formatted='false']").forEach(function (
     input.setAttribute('data-country', select.value)
     input.setAttribute('data-is-formatted', 'true')
 
+    input.addEventListener('input', function(event) {
+        if( !event.data ) {
+            event.target.value.indexOf(event.target.dataset.code) !== 0 ? event.target.value = event.target.dataset.code : null
+        }
+        if( !/^\d+$/.test(event.target.value) ) {
+            event.target.value = event.target.value.slice(0, -1);
+        }
 
+    });
+
+    select.addEventListener('change', function(e) {
+        const countryCode = e.target.value;
+        input.value = countryCode
+        input.dataset.code = countryCode
+        const length = code_x_length[ input.value ] + input.value.length
+        input.setAttribute('maxLength', length)
+        input.setAttribute('minLength', length)
+    })
 
 })

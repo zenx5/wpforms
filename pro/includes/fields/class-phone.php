@@ -138,6 +138,14 @@ class WPForms_Field_Phone extends WPForms_Field {
 
 		if ( $this->has_formatted_phone( $forms ) ) {
 			wp_enqueue_script(
+				'wpforms-constants-phone',
+				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/constans.js',
+				[ 'jquery' ],
+				'',
+				true
+			);
+
+			wp_enqueue_script(
 				'wpforms-countries-phone',
 				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/countries.js',
 				[ 'jquery' ],

@@ -139,8 +139,16 @@ class WPForms_Field_Phone extends WPForms_Field {
 		if ( $this->has_formatted_phone( $forms ) ) {
 			wp_enqueue_script(
 				'wpforms-constants-phone',
-				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/constans.js',
-				[ 'jquery' ],
+				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/codes.js',
+				[],
+				'',
+				true
+			);
+
+			wp_enqueue_script(
+				'wpforms-flags-phone',
+				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/flags.js',
+				[],
 				'',
 				true
 			);
@@ -148,7 +156,7 @@ class WPForms_Field_Phone extends WPForms_Field {
 			wp_enqueue_script(
 				'wpforms-countries-phone',
 				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/countries.js',
-				[ 'jquery' ],
+				[],
 				'',
 				true
 			);
@@ -156,7 +164,7 @@ class WPForms_Field_Phone extends WPForms_Field {
 			wp_enqueue_script(
 				'wpforms-formatted-phone-field',
 				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/phone-formatted.js',
-				[ 'jquery' ],
+				[],
 				'',
 				true
 			);

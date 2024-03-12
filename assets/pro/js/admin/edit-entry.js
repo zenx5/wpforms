@@ -278,6 +278,7 @@ var WPFormsEditEntry = window.WPFormsEditEntry || ( function( document, window, 
 		 * @param {object} response Response data.
 		 */
 		displayErrors: function( response ) {
+			console.log(response);
 
 			var errors = response.data && ( 'errors' in response.data ) ? response.data.errors : null;
 

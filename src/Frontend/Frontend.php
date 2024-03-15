@@ -1586,7 +1586,7 @@ class Frontend {
 			'wpforms-validation',
 			WPFORMS_PLUGIN_URL . 'assets/lib/jquery.validate.min.js',
 			[ 'jquery' ],
-			'1.19.5',
+			Time(),
 			true
 		);
 

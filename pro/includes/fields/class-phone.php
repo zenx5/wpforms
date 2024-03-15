@@ -110,7 +110,7 @@ class WPForms_Field_Phone extends WPForms_Field {
 				'wpforms-formatted-phone-field',
 				WPFORMS_PLUGIN_URL . "assets/pro/css/fields/phone/formatted-tel-input.css",
 				[],
-				self::INTL_VERSION
+				Time()
 			);
 		}
 	}
@@ -149,7 +149,7 @@ class WPForms_Field_Phone extends WPForms_Field {
 				'wpforms-flags-phone',
 				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/flags.js',
 				[],
-				'',
+				'1.0.0',
 				true
 			);
 
@@ -157,7 +157,7 @@ class WPForms_Field_Phone extends WPForms_Field {
 				'wpforms-countries-phone',
 				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/countries.js',
 				[],
-				'',
+				'1.0.0',
 				true
 			);
 
@@ -165,7 +165,7 @@ class WPForms_Field_Phone extends WPForms_Field {
 				'wpforms-formatted-phone-field',
 				WPFORMS_PLUGIN_URL . 'assets/pro/js/fields/phone-formatted.js',
 				[],
-				'',
+				Time(),
 				true
 			);
 		}

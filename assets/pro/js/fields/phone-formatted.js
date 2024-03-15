@@ -33,6 +33,8 @@ document.querySelectorAll("input[data-is-formatted='false']").forEach(function (
     select.appendChild(ul)
     let index = 0
     for(const [countryName, countryCode, countryPhoneCode] of countries){
+        const enableCountryCode = input.dataset?.enableCountryCode?.split(',').filter( code => code!=='' ) ?? []
+        if( enableCountryCode.length > 0 && !enableCountryCode.includes(countryCode) ) continue
         const option = document.createElement('li')
         option.classList.add('option')
         option.setAttribute('data-value', countryPhoneCode)
@@ -41,10 +43,7 @@ document.querySelectorAll("input[data-is-formatted='false']").forEach(function (
         option.addEventListener('click', function(e) {
             e.preventDefault()
             select.classList.toggle('open')
-            console.log( flagsPosition, e.target.dataset.code )
-
             const { backgroundPosition, height } = flagsPosition[ e.target.dataset.code ] ?? { backgroundPosition:0, height:10 }
-            console.log( backgroundPosition, height )
             spanButton.style.height = `${height}px`
             spanButton.style.backgroundPosition = `${backgroundPosition}px 0px`
             input.value = e.target.dataset.value

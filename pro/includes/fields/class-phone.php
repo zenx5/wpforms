@@ -335,6 +335,36 @@ class WPForms_Field_Phone extends WPForms_Field {
 		// Hide Label.
 		$this->field_option( 'label_hide', $field );
 
+		// Country code enable.
+		$country_code_label = $this->field_element(
+			'label',
+			$field,
+			[
+				'slug'          => 'enable-country-code',
+				'value'         => esc_html__( 'Enable Countries', 'wpforms-lite' )
+			],
+			false
+		);
+
+		$value = !empty( $field['enable-country-code'] ) ? esc_attr( $field['enable-country-code'] ) : '';
+
+		$country_code_input = $this->field_element(
+			'text',
+			$field,
+			[
+				'slug'  => 'enable-country-code',
+				'value' => $value
+			],
+			false
+		);
+
+		$args = [
+			'slug'    => 'enable-country-code',
+			'content' => $country_code_label.$country_code_input
+		];
+
+		$this->field_element('row', $field, $args);
+
 		// Options close markup.
 		$args = [
 			'markup' => 'close',
@@ -379,6 +409,9 @@ class WPForms_Field_Phone extends WPForms_Field {
 
 		// Define data.
 		$primary = $field['properties']['inputs']['primary'];
+		if( isset($field['enable-country-code']) && $this->has_formatted_phone([$form_data]) ){
+			$primary['data']['enable-country-code'] = $field['enable-country-code'];
+		}
 
 		// Allow input type to be changed for this particular field.
 		$type = apply_filters( 'wpforms_phone_field_input_type', 'tel' );

@@ -47,7 +47,7 @@ div.input-group.phone-formatted {
             padding: 5px 0px;
             cursor: pointer;
             overflow-y: scroll;
-            height: 400px;
+            max-height: 400px;
             width: 500px;
             li {
                 display: inline-flex;
@@ -76,7 +76,7 @@ div.input-group.phone-formatted {
 
     em.wpforms-error {
         position: absolute;
-        top: 90px;
+        top: 50px;
     }
 
 

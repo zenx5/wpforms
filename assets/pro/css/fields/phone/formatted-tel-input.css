@@ -1,11 +1,11 @@
 div.input-group.phone-formatted {
     display:flex;
     gap: 2px;
-    border: 1px solid #ced4da;
     border-radius: 0.25rem;
     margin-bottom: 10px;
 
     .input-group-prepend select, input[type="tel"] {
+        padding-left: 55px;
         border:none;
         outline: none;
         &:focus {
@@ -16,13 +16,17 @@ div.input-group.phone-formatted {
     }
 
     .input-group-prepend div.custom-select {
+        position: absolute;
         button.btn-select {
-            padding: 10px;
+            padding: 0px;
+            padding-left: 10px;
             width: 50px;
-            height: 0px;
+            height: 35px;
+            border-right: 1px solid #ced4da;
+            margin-right: 5px;
             span.flag-icon {
                 width: 20px;
-                height: 16px;
+                height: 20px;
                 display: block;
                 box-shadow: 0px 0px 1px 0px #888;
                 background-image: url(../../../images/vendor/intl-tel-input-flags.png);
@@ -62,7 +66,6 @@ div.input-group.phone-formatted {
                     background-image: url(../../../images/vendor/intl-tel-input-flags.png);
                     background-repeat: no-repeat;
                     background-color: #dbdbdb;
-                    /* background-position: -5368px 0px; */
                 }
                 &:hover {
                     background-color: #a3ace1;
@@ -70,28 +73,6 @@ div.input-group.phone-formatted {
             }
         }
     }
-
-    /* .input-group-prepend select{
-        max-width: 100px;
-        option {
-            height: 20px;
-            width: 30px;
-            span.flag-icon {
-                display: block;
-                height: 11px;
-                width: 20px;
-                box-shadow: 0px 0px 1px 0px #888;
-                background-image: url(../../../images/vendor/intl-tel-input-flags.png);
-                background-repeat: no-repeat;
-                background-color: #dbdbdb;
-                background-position: -5368px 0px;
-            }
-            span.label{
-
-            }
-
-        }
-    } */
 
     em.wpforms-error {
         position: absolute;

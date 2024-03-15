@@ -1,18 +1,13 @@
 console.log('is running phone-formatted.js')
 
 document.querySelectorAll("input[data-is-formatted='false']").forEach(function (input) {
-    console.log(input)
     //create a phone input with select for country flags
+    const precontainer = document.createElement('div')
     const container = document.createElement('div')
+    precontainer.classList.add('wpforms-field')
+    precontainer.appendChild(container)
     container.classList.add('input-group')
     container.classList.add('phone-formatted')
-    for(const className of input.classList ) {
-        if( className==='wpforms-field-medium' ) {
-            container.style.width = '60%'
-            input.style.width = '100%'
-            input.classList.remove(className)
-        }
-    }
     input.parentNode.insertBefore(container, input)
     const inputGroupPrepend = document.createElement('div')
     inputGroupPrepend.classList.add('input-group-prepend')
@@ -45,7 +40,6 @@ document.querySelectorAll("input[data-is-formatted='false']").forEach(function (
         option.innerText = `${countryName} (${countryPhoneCode})`
         option.addEventListener('click', function(e) {
             e.preventDefault()
-            // buttonSelect.innerText = e.target.innerText
             select.classList.toggle('open')
             console.log( flagsPosition, e.target.dataset.code )
 
@@ -71,24 +65,7 @@ document.querySelectorAll("input[data-is-formatted='false']").forEach(function (
         ul.appendChild(option)
         index++
     }
-    // const select = document.createElement('select')
-    // select.classList.add('custom-select')
-    // inputGroupPrepend.appendChild(select)
-    // for(const [countryName, countryCode, countryPhoneCode] of countries){
-    //     const option = document.createElement('option')
-    //     option.value = countryPhoneCode
-    //     const flag = document.createElement('span')
-    //     flag.classList.add('flag-icon')
-    //     flag.style.backgroundPosition = `-5368px 0px`
-    //     // const label = document.createElement('span')
-    //     // label.classList.add('label')
-    //     // label.innerText = `${countryName} (${countryCode})`
-    //     option.appendChild(flag)
-    //     // option.appendChild(label)
-    //     select.appendChild(option)
-    // }
     input.setAttribute('type', 'tel')
-    input.setAttribute('placeholder', 'Phone')
     input.classList.add('form-control')
     input.classList.add('phone')
     input.classList.add('phone-formatted')
@@ -98,7 +75,8 @@ document.querySelectorAll("input[data-is-formatted='false']").forEach(function (
 
     input.addEventListener('input', function(event) {
         if( !event.data ) {
-            event.target.value.indexOf(event.target.dataset.code) !== 0 ? event.target.value = event.target.dataset.code : null
+            const code = event.target.dataset.code ?? ''
+            if( event.target.value.indexOf(code) !== 0 )  event.target.value = code
         }
         if( !/^\d+$/.test(event.target.value) ) {
             event.target.value = event.target.value.slice(0, -1);
